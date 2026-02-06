@@ -2,6 +2,8 @@ import express from "express";
 import dataBase from "./DATABASE/database.mjs";
 import dotenv, { config, configDotenv } from "dotenv";
 import cors from "cors";
+import { createServer } from "http";
+import { Server } from "socket.io";
 import cookieParser from "cookie-parser";
 import register from "./controller/regAuth.mjs";
 import login from "./controller/loginAuth.mjs";
@@ -23,6 +25,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
+const server = createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin : process.env.API_VITE_URL,
+        methods : ["GET", "POST"]
+    }
+})
 
 app.use(cors({
     origin: process.env.CLIENT_API,
