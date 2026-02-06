@@ -1,4 +1,4 @@
-import dataBase from "../DATABASE/database.mjs";
+import dataBase from "../../DATABASE/database.mjs";
 
 const adminTrackPackage = async(req, res) => {
     
